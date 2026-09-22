@@ -68,7 +68,7 @@ they are not estimates.
 | Regression tests | **89 / 89 PASS** (0 failed, 0 skipped) |
 | Stage 4 API E2E (`demo_run_tests`) | **PASS** (11/11) |
 | Stage 5 controlled-repair E2E (`demo_agent_pipeline`) | **PASS** (real-LLM repair; mock fallback also PASS without an API key) |
-| Real DeepSeek E2E (`demo_real_llm_pipeline`) | **PASS** — 12 generated, **12/12 executed PASS** |
+| Real DeepSeek E2E (`demo_real_llm_pipeline`) | **PASS** — 11 generated, **11/11 executed PASS** |
 | RAG used in real E2E | **Yes** (retrieval from local Chroma before every LLM call) |
 | Failure categories | **5** (`test_code_error`, `api_defect`, `test_data_error`, `environment_error`, `unknown`) |
 | Max repair attempts | **2** (default 1) |
@@ -78,8 +78,8 @@ they are not estimates.
 > The deterministic contract guard (`find_contract_conflicts`) rejects objectively invalid
 > LLM cases — e.g. a "401 wrong credentials" case that sends a 140-char password against a
 > `maxLength: 128` schema (that request can only return 422). During development the guard
-> repeatedly caught exactly this LLM mistake; the final verified run produced 12 self-consistent
-> cases and rejected 0.
+> repeatedly caught exactly this LLM mistake; the latest verified run produced 11 self-consistent
+> cases and rejected 0 (case count varies run to run due to LLM non-determinism).
 
 CI never calls the real LLM. The Real DeepSeek result above is produced separately by the
 manual command in [Real LLM E2E](#real-llm-e2e-optional-paid).

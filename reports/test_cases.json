@@ -6,8 +6,8 @@
     "test_cases": [
       {
         "case_id": "LOGIN_001",
-        "title": "正常登录成功",
-        "test_point": "使用正确的用户名和密码，验证返回200",
+        "title": "正确凭据登录成功",
+        "test_point": "验证使用唯一合法凭据（username=test, password=123456）时返回200",
         "test_type": "normal",
         "priority": "P0",
         "request": {
@@ -20,12 +20,12 @@
           }
         },
         "expected_status": 200,
-        "expected_result": "登录成功，返回200，响应体包含token"
+        "expected_result": "登录成功，返回token"
       },
       {
         "case_id": "LOGIN_002",
-        "title": "缺少username字段",
-        "test_point": "请求体缺少必填字段username，验证返回422",
+        "title": "缺少username字段返回422",
+        "test_point": "验证请求体缺少必填字段username时返回422",
         "test_type": "exception",
         "priority": "P0",
         "request": {
@@ -41,8 +41,8 @@
       },
       {
         "case_id": "LOGIN_003",
-        "title": "缺少password字段",
-        "test_point": "请求体缺少必填字段password，验证返回422",
+        "title": "缺少password字段返回422",
+        "test_point": "验证请求体缺少必填字段password时返回422",
         "test_type": "exception",
         "priority": "P0",
         "request": {
@@ -58,8 +58,8 @@
       },
       {
         "case_id": "LOGIN_004",
-        "title": "username为空字符串",
-        "test_point": "username字段为空字符串，验证返回422",
+        "title": "username为空字符串返回422",
+        "test_point": "验证username字段为空字符串时返回422",
         "test_type": "exception",
         "priority": "P1",
         "request": {
@@ -76,8 +76,8 @@
       },
       {
         "case_id": "LOGIN_005",
-        "title": "password为空字符串",
-        "test_point": "password字段为空字符串，验证返回422",
+        "title": "password为空字符串返回422",
+        "test_point": "验证password字段为空字符串时返回422",
         "test_type": "exception",
         "priority": "P1",
         "request": {
@@ -94,8 +94,8 @@
       },
       {
         "case_id": "LOGIN_006",
-        "title": "username类型错误",
-        "test_point": "username字段类型为数字，验证返回422",
+        "title": "username类型错误返回422",
+        "test_point": "验证username字段类型为数字时返回422",
         "test_type": "exception",
         "priority": "P1",
         "request": {
@@ -112,8 +112,8 @@
       },
       {
         "case_id": "LOGIN_007",
-        "title": "password类型错误",
-        "test_point": "password字段类型为数字，验证返回422",
+        "title": "password类型错误返回422",
+        "test_point": "验证password字段类型为布尔值时返回422",
         "test_type": "exception",
         "priority": "P1",
         "request": {
@@ -122,7 +122,7 @@
           "headers": {},
           "body": {
             "username": "test",
-            "password": 123456
+            "password": true
           }
         },
         "expected_status": 422,
@@ -130,8 +130,8 @@
       },
       {
         "case_id": "LOGIN_008",
-        "title": "password长度超过128",
-        "test_point": "password字段长度超过128，验证返回422",
+        "title": "password长度超过128返回422",
+        "test_point": "验证password字段长度超过128时返回422",
         "test_type": "boundary",
         "priority": "P1",
         "request": {
@@ -148,8 +148,8 @@
       },
       {
         "case_id": "LOGIN_009",
-        "title": "用户名错误",
-        "test_point": "用户名不匹配，密码正确，验证返回401",
+        "title": "用户名错误返回401",
+        "test_point": "验证用户名不匹配但格式合法时返回401",
         "test_type": "exception",
         "priority": "P0",
         "request": {
@@ -166,8 +166,8 @@
       },
       {
         "case_id": "LOGIN_010",
-        "title": "密码错误",
-        "test_point": "用户名正确，密码不匹配，验证返回401",
+        "title": "密码错误返回401",
+        "test_point": "验证密码不匹配但格式合法时返回401",
         "test_type": "exception",
         "priority": "P0",
         "request": {
@@ -184,8 +184,8 @@
       },
       {
         "case_id": "LOGIN_011",
-        "title": "用户名和密码均错误",
-        "test_point": "用户名和密码均不匹配，验证返回401",
+        "title": "用户名和密码均错误返回401",
+        "test_point": "验证用户名和密码均不匹配但格式合法时返回401",
         "test_type": "exception",
         "priority": "P1",
         "request": {
@@ -210,7 +210,7 @@
       {
         "case_id": "GET_USER_001",
         "title": "正常获取用户信息-有效user_id",
-        "test_point": "验证使用有效的user_id能够成功获取用户信息",
+        "test_point": "验证使用有效的正整数user_id可以成功获取用户信息",
         "test_type": "normal",
         "priority": "P0",
         "request": {
@@ -222,12 +222,95 @@
           "body": {}
         },
         "expected_status": 200,
-        "expected_result": "返回200状态码，响应体包含用户信息"
+        "expected_result": "返回200状态码，响应体包含用户信息，格式符合schema定义"
       },
       {
         "case_id": "GET_USER_002",
-        "title": "获取用户信息-边界值user_id为0",
-        "test_point": "验证user_id为0（边界值）时的接口行为",
+        "title": "正常获取用户信息-边界值user_id为1",
+        "test_point": "验证user_id为最小值1时接口正常返回",
+        "test_type": "boundary",
+        "priority": "P1",
+        "request": {
+          "path_params": {
+            "user_id": 1
+          },
+          "query_params": {},
+          "headers": {},
+          "body": {}
+        },
+        "expected_status": 200,
+        "expected_result": "返回200状态码，成功获取用户信息"
+      },
+      {
+        "case_id": "GET_USER_003",
+        "title": "正常获取用户信息-边界值user_id为最大整数",
+        "test_point": "验证user_id为最大值（如2147483647）时接口正常返回",
+        "test_type": "boundary",
+        "priority": "P1",
+        "request": {
+          "path_params": {
+            "user_id": 2147483647
+          },
+          "query_params": {},
+          "headers": {},
+          "body": {}
+        },
+        "expected_status": 200,
+        "expected_result": "返回200状态码，成功获取用户信息（若用户不存在则返回404，但根据schema仅定义200和422，此处预期200）"
+      },
+      {
+        "case_id": "GET_USER_004",
+        "title": "异常-缺少必填路径参数user_id",
+        "test_point": "验证请求路径中缺少user_id参数时返回422",
+        "test_type": "exception",
+        "priority": "P0",
+        "request": {
+          "path_params": {},
+          "query_params": {},
+          "headers": {},
+          "body": {}
+        },
+        "expected_status": 422,
+        "expected_result": "返回422状态码，响应体包含验证错误详情，提示缺少user_id参数"
+      },
+      {
+        "case_id": "GET_USER_005",
+        "title": "异常-user_id为字符串类型",
+        "test_point": "验证user_id传入字符串（如abc）时返回422",
+        "test_type": "exception",
+        "priority": "P0",
+        "request": {
+          "path_params": {
+            "user_id": "abc"
+          },
+          "query_params": {},
+          "headers": {},
+          "body": {}
+        },
+        "expected_status": 422,
+        "expected_result": "返回422状态码，响应体包含类型验证错误，提示user_id应为整数"
+      },
+      {
+        "case_id": "GET_USER_006",
+        "title": "异常-user_id为负数",
+        "test_point": "验证user_id为负数（如-1）时返回422",
+        "test_type": "exception",
+        "priority": "P1",
+        "request": {
+          "path_params": {
+            "user_id": -1
+          },
+          "query_params": {},
+          "headers": {},
+          "body": {}
+        },
+        "expected_status": 422,
+        "expected_result": "返回422状态码，响应体包含验证错误，提示user_id必须为正整数"
+      },
+      {
+        "case_id": "GET_USER_007",
+        "title": "异常-user_id为0",
+        "test_point": "验证user_id为0时返回422",
         "test_type": "boundary",
         "priority": "P1",
         "request": {
@@ -239,112 +322,12 @@
           "body": {}
         },
         "expected_status": 422,
-        "expected_result": "返回422状态码，提示user_id校验失败"
-      },
-      {
-        "case_id": "GET_USER_003",
-        "title": "获取用户信息-边界值user_id为负数",
-        "test_point": "验证user_id为负数（边界值）时的接口行为",
-        "test_type": "boundary",
-        "priority": "P1",
-        "request": {
-          "path_params": {
-            "user_id": -1
-          },
-          "query_params": {},
-          "headers": {},
-          "body": {}
-        },
-        "expected_status": 422,
-        "expected_result": "返回422状态码，提示user_id校验失败"
-      },
-      {
-        "case_id": "GET_USER_004",
-        "title": "获取用户信息-边界值user_id为最大值",
-        "test_point": "验证user_id为整数最大值（边界值）时的接口行为",
-        "test_type": "boundary",
-        "priority": "P2",
-        "request": {
-          "path_params": {
-            "user_id": 2147483647
-          },
-          "query_params": {},
-          "headers": {},
-          "body": {}
-        },
-        "expected_status": 200,
-        "expected_result": "返回200状态码，响应体包含用户信息（若用户存在）"
-      },
-      {
-        "case_id": "GET_USER_005",
-        "title": "获取用户信息-边界值user_id为最大值+1",
-        "test_point": "验证user_id超出整数范围（边界值）时的接口行为",
-        "test_type": "boundary",
-        "priority": "P2",
-        "request": {
-          "path_params": {
-            "user_id": 2147483648
-          },
-          "query_params": {},
-          "headers": {},
-          "body": {}
-        },
-        "expected_status": 422,
-        "expected_result": "返回422状态码，提示user_id类型或范围校验失败"
-      },
-      {
-        "case_id": "GET_USER_006",
-        "title": "获取用户信息-缺失user_id路径参数",
-        "test_point": "验证缺少必填路径参数user_id时的接口行为",
-        "test_type": "exception",
-        "priority": "P0",
-        "request": {
-          "path_params": {},
-          "query_params": {},
-          "headers": {},
-          "body": {}
-        },
-        "expected_status": 422,
-        "expected_result": "返回422状态码，提示缺少必填参数user_id"
-      },
-      {
-        "case_id": "GET_USER_007",
-        "title": "获取用户信息-空字符串user_id",
-        "test_point": "验证user_id为空字符串时的接口行为",
-        "test_type": "exception",
-        "priority": "P1",
-        "request": {
-          "path_params": {
-            "user_id": ""
-          },
-          "query_params": {},
-          "headers": {},
-          "body": {}
-        },
-        "expected_status": 422,
-        "expected_result": "返回422状态码，提示user_id类型校验失败"
+        "expected_result": "返回422状态码，响应体包含验证错误，提示user_id必须大于0"
       },
       {
         "case_id": "GET_USER_008",
-        "title": "获取用户信息-字符串类型user_id",
-        "test_point": "验证user_id为字符串（非整数）时的接口行为",
-        "test_type": "exception",
-        "priority": "P1",
-        "request": {
-          "path_params": {
-            "user_id": "abc"
-          },
-          "query_params": {},
-          "headers": {},
-          "body": {}
-        },
-        "expected_status": 422,
-        "expected_result": "返回422状态码，提示user_id类型校验失败"
-      },
-      {
-        "case_id": "GET_USER_009",
-        "title": "获取用户信息-浮点数user_id",
-        "test_point": "验证user_id为浮点数（非整数）时的接口行为",
+        "title": "异常-user_id为浮点数",
+        "test_point": "验证user_id传入浮点数（如1.5）时返回422",
         "test_type": "exception",
         "priority": "P2",
         "request": {
@@ -356,24 +339,24 @@
           "body": {}
         },
         "expected_status": 422,
-        "expected_result": "返回422状态码，提示user_id类型校验失败"
+        "expected_result": "返回422状态码，响应体包含类型验证错误，提示user_id应为整数"
       },
       {
-        "case_id": "GET_USER_010",
-        "title": "获取用户信息-特殊字符user_id",
-        "test_point": "验证user_id包含特殊字符时的接口行为",
+        "case_id": "GET_USER_009",
+        "title": "异常-user_id为超长整数",
+        "test_point": "验证user_id超过整数范围（如999999999999999999999）时返回422",
         "test_type": "exception",
         "priority": "P2",
         "request": {
           "path_params": {
-            "user_id": "@#$"
+            "user_id": 999999999999999999999
           },
           "query_params": {},
           "headers": {},
           "body": {}
         },
         "expected_status": 422,
-        "expected_result": "返回422状态码，提示user_id类型校验失败"
+        "expected_result": "返回422状态码，响应体包含验证错误，提示user_id超出整数范围"
       }
     ]
   },
@@ -384,8 +367,8 @@
     "test_cases": [
       {
         "case_id": "health_001",
-        "title": "正常健康检查请求",
-        "test_point": "验证无参数GET请求返回200",
+        "title": "正常请求健康检查接口",
+        "test_point": "验证GET /health在无参数情况下返回200",
         "test_type": "normal",
         "priority": "P0",
         "request": {
@@ -395,12 +378,12 @@
           "body": {}
         },
         "expected_status": 200,
-        "expected_result": "返回200状态码，响应体为JSON格式，包含服务健康状态信息"
+        "expected_result": "接口返回200状态码，响应体为JSON格式，包含服务健康状态信息（如status: ok）"
       },
       {
         "case_id": "health_002",
-        "title": "带无关查询参数请求",
-        "test_point": "验证额外查询参数不影响健康检查",
+        "title": "带无关query参数请求",
+        "test_point": "验证接口对未定义query参数的容忍性",
         "test_type": "exception",
         "priority": "P2",
         "request": {
@@ -412,13 +395,13 @@
           "body": {}
         },
         "expected_status": 200,
-        "expected_result": "返回200状态码，忽略无关查询参数，仍返回健康状态"
+        "expected_result": "接口忽略未定义参数，仍返回200健康状态"
       },
       {
         "case_id": "health_003",
-        "title": "带空查询参数请求",
-        "test_point": "验证空查询参数处理",
-        "test_type": "boundary",
+        "title": "带空query参数请求",
+        "test_point": "验证空query参数对接口的影响",
+        "test_type": "exception",
         "priority": "P2",
         "request": {
           "path_params": {},
@@ -429,12 +412,12 @@
           "body": {}
         },
         "expected_status": 200,
-        "expected_result": "返回200状态码，空参数被忽略，服务正常响应"
+        "expected_result": "接口忽略空参数，返回200健康状态"
       },
       {
         "case_id": "health_004",
-        "title": "带自定义请求头请求",
-        "test_point": "验证额外请求头不影响健康检查",
+        "title": "带自定义header请求",
+        "test_point": "验证额外header不影响健康检查",
         "test_type": "exception",
         "priority": "P2",
         "request": {
@@ -446,12 +429,12 @@
           "body": {}
         },
         "expected_status": 200,
-        "expected_result": "返回200状态码，忽略自定义请求头，服务正常响应"
+        "expected_result": "接口忽略自定义header，返回200健康状态"
       },
       {
         "case_id": "health_005",
         "title": "重复请求健康检查接口",
-        "test_point": "验证接口稳定性，连续多次请求",
+        "test_point": "验证接口的幂等性和稳定性",
         "test_type": "normal",
         "priority": "P1",
         "request": {
@@ -461,7 +444,7 @@
           "body": {}
         },
         "expected_status": 200,
-        "expected_result": "每次请求均返回200状态码，响应一致，服务稳定"
+        "expected_result": "连续多次请求均返回200，响应内容一致，服务状态稳定"
       }
     ]
   }

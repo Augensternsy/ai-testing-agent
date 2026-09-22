@@ -31,7 +31,7 @@ def test_health_001():
     )
 
     assert response.status_code == 200
-    # Expected: 返回200状态码，响应体为JSON格式，包含服务健康状态信息
+    # Expected: 接口返回200状态码，响应体为JSON格式，包含服务健康状态信息（如status: ok）
 
 
 def test_health_002():
@@ -54,7 +54,7 @@ def test_health_002():
     )
 
     assert response.status_code == 200
-    # Expected: 返回200状态码，忽略无关查询参数，仍返回健康状态
+    # Expected: 接口忽略未定义参数，仍返回200健康状态
 
 
 def test_health_003():
@@ -77,7 +77,7 @@ def test_health_003():
     )
 
     assert response.status_code == 200
-    # Expected: 返回200状态码，空参数被忽略，服务正常响应
+    # Expected: 接口忽略空参数，返回200健康状态
 
 
 def test_health_004():
@@ -100,7 +100,7 @@ def test_health_004():
     )
 
     assert response.status_code == 200
-    # Expected: 返回200状态码，忽略自定义请求头，服务正常响应
+    # Expected: 接口忽略自定义header，返回200健康状态
 
 
 def test_health_005():
@@ -123,5 +123,5 @@ def test_health_005():
     )
 
     assert response.status_code == 200
-    # Expected: 每次请求均返回200状态码，响应一致，服务稳定
+    # Expected: 连续多次请求均返回200，响应内容一致，服务状态稳定
 

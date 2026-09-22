@@ -34,23 +34,24 @@ Per-file distribution:
 - Stage 5 controlled-repair E2E (`demo_agent_pipeline.py`): **PASS**
   - With key: real-LLM repair of a `NameError` (analyzed `test_code_error`, confidence 0.92) → re-run 1/1 PASS, repair attempts = 1
   - Without key: deterministic mock fallback path also PASS (prints `REAL_LLM_E2E = NOT RUN` for the LLM dependency and still completes the repair loop)
-- Real DeepSeek E2E (`demo_real_llm_pipeline.py`): **PASS**
+- Real DeepSeek E2E (`demo_real_llm_pipeline.py`): **PASS** (latest run)
   - RAG used: **true** (real local Chroma retrieval before the LLM call)
-  - Generated cases: **12**
-  - Schema-valid / executable cases: **12**
+  - Generated cases: **11** (real-LLM count varies per run; an earlier verified run produced 12)
+  - Schema-valid / executable cases: **11**
   - Contract-conflict cases rejected by the deterministic guard: **0** on this run
   - Structural-invalid cases: **0**
   - Generated code `compile()`: **success**
-  - PyTest: **12 total / 12 passed / 0 failed / 0 errors / 0 skipped**
+  - PyTest: **11 total / 11 passed / 0 failed / 0 errors / 0 skipped**
   - Covered `test_type`: normal, boundary, exception
   - Covered `expected_status`: 200, 401, 422
   - Artifact: `reports/real_llm_e2e_report.json`
-- All-five-stage orchestrator (`run_ai_testing_pipeline.py`): mechanism **runs end-to-end**
-  - 3 OpenAPI paths → 26 real-LLM cases → 3 generated files
-  - Initial run: 22/26 passed; `/login` 11/11, `/health` 5/5
-  - 4 `/users/{id}` failures were classified as **non-`test_code_error`** (LLM assumed
+- All-five-stage orchestrator (`run_ai_testing_pipeline.py`): mechanism **runs end-to-end** (exit 0), latest run
+  - 3 OpenAPI paths → **25** real-LLM cases (count varies; an earlier run produced 26) → 3 generated files
+  - Initial run: **22/25 passed**; `/login` 11/11, `/health` 5/5
+  - The 3 `/users/{id}` failures were classified as **non-`test_code_error`** (LLM assumed
     positive/int32/required constraints not present in the schema) and the agent correctly
-    **declined to auto-rewrite assertions**, emitting analysis reports instead
+    **declined to auto-rewrite assertions**, emitting analysis reports instead;
+    final per-file statuses: `['passed', 'failed', 'passed']`
 
 ## Safety
 

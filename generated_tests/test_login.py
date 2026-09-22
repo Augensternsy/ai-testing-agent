@@ -31,7 +31,7 @@ def test_login_001():
     )
 
     assert response.status_code == 200
-    # Expected: 登录成功，返回200，响应体包含token
+    # Expected: 登录成功，返回token
 
 
 def test_login_002():
@@ -153,7 +153,7 @@ def test_login_007():
     path_params = {}
     query_params = {}
     headers = {}
-    body = {'username': 'test', 'password': 123456}
+    body = {'username': 'test', 'password': True}
 
     url = _build_url(
         '/login',

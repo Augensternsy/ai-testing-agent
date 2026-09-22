@@ -3,9 +3,9 @@
   "model": "deepseek-v3",
   "rag_used": true,
   "api": "/login",
-  "generated_cases": 12,
-  "schema_valid_cases": 12,
-  "executed_cases": 12,
+  "generated_cases": 11,
+  "schema_valid_cases": 11,
+  "executed_cases": 11,
   "rejected_contract_cases": [],
   "structural_invalid_cases": 0,
   "schema_problems": [],
@@ -13,8 +13,8 @@
   "compile_success": true,
   "compile_error": "",
   "pytest": {
-    "total": 12,
-    "passed": 12,
+    "total": 11,
+    "passed": 11,
     "failed": 0,
     "errors": 0,
     "skipped": 0
@@ -31,5 +31,5 @@
   ],
   "real_llm_called": true,
   "status": "PASS",
-  "timestamp": "2026-09-23T01:47:03.018021"
+  "timestamp": "2026-09-23T02:16:04.538027"
 }
