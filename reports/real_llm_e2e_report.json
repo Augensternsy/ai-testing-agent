@@ -1,0 +1,35 @@
+{
+  "llm_provider": "DeepSeek",
+  "model": "deepseek-v3",
+  "rag_used": true,
+  "api": "/login",
+  "generated_cases": 12,
+  "schema_valid_cases": 12,
+  "executed_cases": 12,
+  "rejected_contract_cases": [],
+  "structural_invalid_cases": 0,
+  "schema_problems": [],
+  "generated_test_file": "generated_tests\\test_login_real_llm.py",
+  "compile_success": true,
+  "compile_error": "",
+  "pytest": {
+    "total": 12,
+    "passed": 12,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "covered_test_types": [
+    "boundary",
+    "exception",
+    "normal"
+  ],
+  "covered_expected_status": [
+    200,
+    401,
+    422
+  ],
+  "real_llm_called": true,
+  "status": "PASS",
+  "timestamp": "2026-09-23T01:47:03.018021"
+}

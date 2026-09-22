@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "return_code": 0,
+  "test_target": "generated_tests\\test_agent_demo.py",
+  "base_url": "http://127.0.0.1:8000",
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "pass_rate": 1.0,
+  "duration": 0.006,
+  "test_cases": [
+    {
+      "name": "test_agent_demo_001",
+      "classname": "generated_tests.test_agent_demo",
+      "status": "passed",
+      "duration": 0.006,
+      "message": "",
+      "traceback": ""
+    }
+  ],
+  "stdout": ".                                                                        [100%]\n1 passed in 0.09s\n",
+  "stderr": "",
+  "junit_xml": "E:\\ai-testing-agent\\reports\\pytest_result.xml",
+  "report_json": "",
+  "error": null
+}

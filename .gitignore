@@ -1,0 +1,27 @@
+# secrets
+.env
+
+# virtualenvs
+.venv/
+venv/
+
+# python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+
+# pytest
+.pytest_cache/
+.pytest_tmp/
+
+# runtime outputs (每次运行产物，不入库)
+reports/*.xml
+reports/bug_reports/
+generated_tests/.backups/
+
+# OS
+.DS_Store
+Thumbs.db

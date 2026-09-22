@@ -1,0 +1,30 @@
+{
+  "initial_run": {
+    "total": 1,
+    "passed": 0,
+    "failed": 1,
+    "errors": 0
+  },
+  "failures": [
+    {
+      "test": "test_agent_demo_001",
+      "analysis": {
+        "category": "test_code_error",
+        "confidence": 0.92,
+        "root_cause": "检测到测试代码错误: NameError",
+        "repair_allowed": true
+      },
+      "repair_attempted": true,
+      "repair_success": true
+    }
+  ],
+  "rerun": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0
+  },
+  "final_status": "passed",
+  "repair_attempts": 1,
+  "agent_report": "reports\\agent_report.json"
+}
