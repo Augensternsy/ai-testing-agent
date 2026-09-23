@@ -74,8 +74,12 @@ Per-file distribution:
 
 ## CI
 
-- `.github/workflows/tests.yml` configured for Ubuntu on push/PR; installs
-  `requirements.txt` + editable package and runs the 7 test files with an empty
+- Repository: https://github.com/Augensternsy/ai-testing-agent (public), branch `master`
+- `.github/workflows/tests.yml` runs on Ubuntu + Python 3.13 on every push/PR; installs
+  `requirements.txt` + the editable package and runs the 7 test files with an empty
   `OPENAI_API_KEY` (LLM paths mocked). The real-LLM demo is intentionally excluded.
-- Status note: CI workflow has been authored but **not yet executed on GitHub**
-  (no remote repository has been created or pushed); no remote CI badge result is claimed.
+- GitHub Actions verified result (real remote runs, 2026-09-23):
+  - Run on `c1b6ca6`: **success**
+  - Run on `95de931`: **success** — pytest check-run annotation: **89 passed in 18.84s**
+    (Total 89 / Passed 89 / Failed 0 / Skipped 0)
+- Badge: https://github.com/Augensternsy/ai-testing-agent/actions/workflows/tests.yml/badge.svg

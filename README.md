@@ -1,6 +1,6 @@
 # AI Agent Automated Testing Platform
 
-[![Tests](https://github.com/OWNER/ai-testing-agent/actions/workflows/tests.yml/badge.svg)](https://github.com/OWNER/ai-testing-agent/actions/workflows/tests.yml)
+[![Tests](https://github.com/Augensternsy/ai-testing-agent/actions/workflows/tests.yml/badge.svg)](https://github.com/Augensternsy/ai-testing-agent/actions/workflows/tests.yml)
 
 > An AI-assisted API testing platform that converts OpenAPI specifications into
 > structured test cases, executable PyTest scripts, JUnit / JSON reports, and a
@@ -65,6 +65,7 @@ they are not estimates.
 
 | Item | Result |
 |---|---|
+| GitHub Actions CI (Ubuntu, Python 3.13, no real LLM) | **PASS — 89 / 89** |
 | Regression tests | **89 / 89 PASS** (0 failed, 0 skipped) |
 | Stage 4 API E2E (`demo_run_tests`) | **PASS** (11/11) |
 | Stage 5 controlled-repair E2E (`demo_agent_pipeline`) | **PASS** (real-LLM repair; mock fallback also PASS without an API key) |
