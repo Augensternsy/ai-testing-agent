@@ -65,8 +65,8 @@ they are not estimates.
 
 | Item | Result |
 |---|---|
-| GitHub Actions CI (Ubuntu, Python 3.13, no real LLM) | **PASS — 89 / 89** |
-| Regression tests | **89 / 89 PASS** (0 failed, 0 skipped) |
+| GitHub Actions CI (Ubuntu, Python 3.13, no real LLM) | **PASS — 116 / 116** |
+| Regression tests | **116 / 116 PASS** (0 failed, 0 skipped) |
 | Stage 4 API E2E (`demo_run_tests`) | **PASS** (11/11) |
 | Stage 5 controlled-repair E2E (`demo_agent_pipeline`) | **PASS** (real-LLM repair; mock fallback also PASS without an API key) |
 | Real DeepSeek E2E (`demo_real_llm_pipeline`) | **PASS** — 11 generated, **11/11 executed PASS** |
@@ -212,7 +212,7 @@ ai-testing-agent/
 │       ├── demo_run_tests.py
 │       ├── demo_agent_pipeline.py
 │       └── demo_real_llm_pipeline.py
-├── tests/                         # 89 deterministic/mocked regression tests
+├── tests/                         # 116 tests (89 core + 27 demo API)
 ├── generated_tests/               # generated PyTest (target of repairs)
 ├── reports/                       # example JUnit/JSON/agent/real-LLM reports
 ├── docs/                          # RAG knowledge source (testing standard)
@@ -247,6 +247,36 @@ tests/test_agent_orchestrator.py         # Stage 5 loop
 
 CI (`.github/workflows/tests.yml`) runs on Ubuntu for every push/PR with an empty
 `OPENAI_API_KEY`; Stage 2/5 LLM paths are exercised through mocks only.
+
+---
+
+## Safe Demo Backend
+
+A lightweight FastAPI backend (`ai_testing_agent/demo_api.py`) serves **verified demo
+results only** for public portfolio display. It is designed to let the React frontend
+transition from Showcase Mode to "Demo Backend Online" without any real LLM calls.
+
+**What it does:**
+- Serves preset scenarios (POST /login, GET /users/{id}, GET /health)
+- Returns verified E2E data from `demo_data.py` (login 11/11, users 9/5+4-fail, health 5/5)
+- Provides a Stage 5 Repair Example endpoint
+- CORS restricted to `ai-testing-agent-web.vercel.app` and `localhost:5173`
+- In-memory rate limiting (5 POST /api/demo/run per minute per IP)
+
+**What it does NOT do:**
+- ❌ Invoke DeepSeek or any LLM
+- ❌ Execute arbitrary URLs or OpenAPI specs
+- ❌ Execute generated code or run pytest
+- ❌ Modify source code or generated_tests/
+- ❌ Require any API key
+
+```bash
+# Start the demo backend locally
+uvicorn ai_testing_agent.demo_server:app --host 0.0.0.0 --port 8000
+```
+
+The real AI pipeline remains validated through local E2E tests. The Demo Backend is
+**for public portfolio demonstration only**, not for real-time AI testing.
 
 ---
 

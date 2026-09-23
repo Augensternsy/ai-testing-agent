@@ -5,6 +5,9 @@
 fastapi==0.136.3
 uvicorn==0.48.0
 
+# --- Demo Backend TestClient ---
+httpx==0.28.1
+
 # --- Stage 3 生成测试 / Stage 4 执行 ---
 requests==2.34.2
 pytest==9.1.1

@@ -9,8 +9,8 @@ No accuracy / performance / coverage / efficiency percentages are claimed.
 
 ## Regression (deterministic + mocked; no API key required)
 
-- Total: **89**
-- Passed: **89**
+- Total: **116**
+- Passed: **116**
 - Failed: **0**
 - Skipped: **0**
 - Command: `pytest tests/ --basetemp=.pytest_tmp`
@@ -82,4 +82,6 @@ Per-file distribution:
   - Run on `c1b6ca6`: **success**
   - Run on `95de931`: **success** — pytest check-run annotation: **89 passed in 18.84s**
     (Total 89 / Passed 89 / Failed 0 / Skipped 0)
+  - After adding `tests/test_demo_api.py` (27 new tests): **116 / 116 PASS** locally
+    (CI run pending push)
 - Badge: https://github.com/Augensternsy/ai-testing-agent/actions/workflows/tests.yml/badge.svg

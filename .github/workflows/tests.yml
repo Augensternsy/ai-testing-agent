@@ -38,6 +38,7 @@ jobs:
             tests/test_failure_analyzer.py \
             tests/test_safe_test_repair.py \
             tests/test_agent_orchestrator.py \
+            tests/test_demo_api.py \
             --basetemp=.pytest_tmp -v 2>&1 | tee .pytest_output.txt
 
       # 将 pytest 汇总行写为 check-run notice 注解（公开仓库可经 REST API 匿名读取），
