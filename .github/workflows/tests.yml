@@ -27,13 +27,31 @@ jobs:
       - name: Run regression tests
         env:
           OPENAI_API_KEY: ""
-        run: >
-          pytest
-          tests/test_api_schema_parser.py
-          tests/test_api_test_case_generator.py
-          tests/test_test_code_generator.py
-          tests/test_test_runner.py
-          tests/test_failure_analyzer.py
-          tests/test_safe_test_repair.py
-          tests/test_agent_orchestrator.py
-          --basetemp=.pytest_tmp
+        shell: bash
+        run: |
+          set -o pipefail
+          pytest \
+            tests/test_api_schema_parser.py \
+            tests/test_api_test_case_generator.py \
+            tests/test_test_code_generator.py \
+            tests/test_test_runner.py \
+            tests/test_failure_analyzer.py \
+            tests/test_safe_test_repair.py \
+            tests/test_agent_orchestrator.py \
+            --basetemp=.pytest_tmp -v 2>&1 | tee .pytest_output.txt
+
+      # 将 pytest 汇总行写为 check-run notice 注解（公开仓库可经 REST API 匿名读取），
+      # 使 CI 的 Total/Passed/Failed/Skipped 可被机器核验，无需登录网页日志。
+      - name: Report pytest summary
+        if: always()
+        shell: bash
+        run: |
+          line=$(grep -E '=+ *[0-9]+ (passed|failed|skipped|error|xfailed|xpassed)' .pytest_output.txt | tail -1 | sed 's/^=* *//; s/ *=*$//')
+          echo "Pytest summary: $line"
+          echo "::notice title=Pytest Summary::${line}"
+          {
+            echo "### Pytest summary"
+            echo '```'
+            echo "$line"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
